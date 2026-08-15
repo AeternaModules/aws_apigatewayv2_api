@@ -20,7 +20,7 @@ output "apigatewayv2_apis_body" {
 }
 output "apigatewayv2_apis_cors_configuration" {
   description = "Map of cors_configuration values across all apigatewayv2_apis, keyed the same as var.apigatewayv2_apis"
-  value       = { for k, v in aws_apigatewayv2_api.apigatewayv2_apis : k => v.cors_configuration if v.cors_configuration != null && length(v.cors_configuration) > 0 }
+  value       = { for k, v in aws_apigatewayv2_api.apigatewayv2_apis : k => one(v.cors_configuration) if v.cors_configuration != null && length(v.cors_configuration) > 0 }
 }
 output "apigatewayv2_apis_credentials_arn" {
   description = "Map of credentials_arn values across all apigatewayv2_apis, keyed the same as var.apigatewayv2_apis"
